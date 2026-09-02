@@ -13,7 +13,7 @@
 /* not shift the 1 becouse if do anding with 1 <<no will produce 1 in bit ex(2,3) will produce number >1
 we will do rightshifting to number and with 00000001
 */
-#define getBit(reg,no) ((reg>>no)&1)
+#define GetBit(reg,no) ((reg>>no)&1)
 
 
 #endif /* COMMON_BITMATH_H_ */

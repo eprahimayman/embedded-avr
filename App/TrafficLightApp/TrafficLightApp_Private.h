@@ -1,0 +1,11 @@
+/*
+ * TrafficLightApp_Private.h
+ *
+ *  Created on: Sep 2, 2026
+ *      Author: eprah
+ */
+
+#ifndef APP_TRAFFICLIGHTAPP_TRAFFICLIGHTAPP_PRIVATE_H_
+#define APP_TRAFFICLIGHTAPP_TRAFFICLIGHTAPP_PRIVATE_H_
+
+#endif /* APP_TRAFFICLIGHTAPP_TRAFFICLIGHTAPP_PRIVATE_H_ */

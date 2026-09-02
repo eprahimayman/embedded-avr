@@ -8,10 +8,12 @@
 #ifndef HAL_LED_LED_INTERFACE_H_
 #define HAL_LED_LED_INTERFACE_H_
 #include"../../Mcal/Dio/Dio_Private.h"
-#include "../../MCAL/DIO/DIO_Interface.h"
+#include"../../Mcal/Dio/Dio_InterFace.h"
 #include"../../Common/StdTypes.h"
 #include <stdint.h>
-void Led_Init(uint8_t GroupName,uint8_t PinNo);
-void Led_State(uint8_t GroupName,uint8_t PinNo,uint8_t State);
-void Led_Toggle(uint8_t GroupName,uint8_t PinNo);
+#include "Led_Private.h"
+void Led_Init(uint8_t LedGroup, uint8_t LedPin);
+void Led_On(uint8_t LedGroup, uint8_t LedPin,uint8_t ConnectionType);
+void Led_Off(uint8_t LedGroup, uint8_t LedPin,uint8_t ConnectionType);
+void Led_Toggle(uint8_t LedGroup, uint8_t LedPin);
 #endif /* HAL_LED_LED_INTERFACE_H_ */

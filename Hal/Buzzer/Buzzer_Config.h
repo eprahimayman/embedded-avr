@@ -7,7 +7,8 @@
 
 #ifndef HAL_BUZZER_BUZZER_CONFIG_H_
 #define HAL_BUZZER_BUZZER_CONFIG_H_
-
-#define Connection_ Source_Connection
-
+/*
+#include"Buzzer_Private.h"
+#define Connection   Source_Connection
+*/
 #endif /* HAL_BUZZER_BUZZER_CONFIG_H_ */

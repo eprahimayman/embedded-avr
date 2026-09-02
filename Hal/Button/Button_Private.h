@@ -7,17 +7,15 @@
 
 #ifndef HAL_BUTTON_BUTTON_PRIVATE_H_
 #define HAL_BUTTON_BUTTON_PRIVATE_H_
-typedef enum
-{
-	BUTTON_PRESSED,
-	BUTTON_RELEASED
-}Button_State_t;
-
-typedef enum
-{
-	BUTTON_ACTIVE_LOW,
-	BUTTON_ACTIVE_HIGH
+typedef enum{
+	InternalPullUp,
+	ExternalPullUp,
+	PullDown,
 }Button_Connection_t;
 
+typedef enum {
+	ButtonPressed = 0,
+	ButtonNotPressed
+} State_t;
 
 #endif /* HAL_BUTTON_BUTTON_PRIVATE_H_ */

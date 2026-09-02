@@ -9,7 +9,7 @@
 #include "DIO_Interface.h"
 #include "DIO_Private.h"
 #include "DIO_Config.h"
-#include"atmega32Register"
+#include"../atmega32Register.h"
 #include"Dio_InterFace.h"
 
 void Dio_DirectionSetForPin(unsigned char GroupName,unsigned char PinNo,unsigned char DirectionState){
@@ -77,24 +77,37 @@ void Dio_WriteValueForPin(unsigned char GroupName,unsigned char PinNo,unsigned c
 		}
 	}
 }
-void Dio_WriteValueForGroup(unsigned char GroupName,unsigned char OutPutValue){
-	if(OutPutValue==Dio_OutPutLow){
-		switch(GroupName){
-		case Dio_GroupA:PORTA_Reg=0x00;break;
-		case Dio_GroupB:PORTB_Reg=0x00;break;
-		case Dio_GroupC:PORTC_Reg=0x00;break;
-		case Dio_GroupD:PORTD_Reg=0x00;break;
-		default:break;
-		}
-	}else if(OutPutValue==Dio_OutPutHigh){
-		switch(GroupName){
-		case Dio_GroupA:PORTA_Reg=0xFF;break;
-		case Dio_GroupB:PORTB_Reg=0xFF;break;
-		case Dio_GroupC:PORTC_Reg=0xFF;break;
-		case Dio_GroupD:PORTD_Reg=0xFF;break;
-		default:break;
-		}
-	}
+//
+//void Dio_WriteValueForGroup(unsigned char GroupName,unsigned char OutPutValue){
+//	if(OutPutValue==Dio_OutPutLow){
+//		switch(GroupName){
+//		case Dio_GroupA:PORTA_Reg=0x00;break;
+//		case Dio_GroupB:PORTB_Reg=0x00;break;
+//		case Dio_GroupC:PORTC_Reg=0x00;break;
+//		case Dio_GroupD:PORTD_Reg=0x00;break;
+//		default:break;
+//		}
+//	}else if(OutPutValue==Dio_OutPutHigh){
+//		switch(GroupName){
+//		case Dio_GroupA:PORTA_Reg=0xFF;break;
+//		case Dio_GroupB:PORTB_Reg=0xFF;break;
+//		case Dio_GroupC:PORTC_Reg=0xFF;break;
+//		case Dio_GroupD:PORTD_Reg=0xFF;break;
+//		default:break;
+//		}
+//	}
+//}
+
+void Dio_WriteValueForGroup(unsigned char GroupName, unsigned char OutPutValue)
+{
+    switch(GroupName)
+    {
+        case Dio_GroupA: PORTA_Reg = OutPutValue; break;
+        case Dio_GroupB: PORTB_Reg = OutPutValue; break;
+        case Dio_GroupC: PORTC_Reg = OutPutValue; break;
+        case Dio_GroupD: PORTD_Reg = OutPutValue; break;
+        default: break;
+    }
 }
 unsigned char Dio_ReadValueForPin(unsigned char GroupName,unsigned char PinNo){
 	unsigned char PinValue=0x00;
@@ -124,6 +137,7 @@ return PinValue;
 
 void Dio_InterNalPullUpForPin(unsigned char GroupName,unsigned char PinNo,unsigned char InterNalPullUpState){
 	if(PinNo<=Dio_Pin7){
+		Dio_DirectionSetForPin(GroupName,PinNo,Dio_InPut);
 		if(InterNalPullUpState==DIO_High){
 		switch(GroupName){
 		case Dio_GroupA:SetBit(PORTA_Reg,PinNo);break;
@@ -133,16 +147,18 @@ void Dio_InterNalPullUpForPin(unsigned char GroupName,unsigned char PinNo,unsign
 	    default:break;
 }
 		}else if(InterNalPullUpState==DIO_Low){
+			switch(GroupName){
 		case Dio_GroupA:ClearBit(PORTA_Reg,PinNo);break;
 		case Dio_GroupB:ClearBit(PORTB_Reg,PinNo);break;
 		case Dio_GroupC:ClearBit(PORTC_Reg,PinNo);break;
 		case Dio_GroupD:ClearBit(PORTD_Reg,PinNo);break;
 		default:break;
 		}
+		}
 	}
 }
 void Dio_InterNalPullUpForGroup(unsigned char GroupName,unsigned char InterNalPullUpState){
-
+	Dio_DirectionSetForGroup(GroupName,Dio_InPut);
 	if(InterNalPullUpState==DIO_Low){
 		switch(GroupName){
 		case Dio_GroupA:PORTA_Reg=0x00;break;
@@ -174,13 +190,15 @@ void DIO_TogglePin(unsigned char GroupName,unsigned char PinNo){
 		}
 	}
 }
+
 void DIO_ToggleGroub(unsigned char GroupName){
 	switch(GroupName)
 	{
 	case Dio_GroupA: PORTA_Reg=~PORTA_Reg; break;
 	case Dio_GroupB: PORTB_Reg=~PORTB_Reg; break;
-	case Dio_GroupC: PORTC_Reg=~PORTC_Reg; break;
+	case Dio_GroupC: PORTB_Reg=~PORTB_Reg; break;
 	case Dio_GroupD: PORTD_Reg=~PORTD_Reg; break;
 	default: break;
 	}
 }
+
