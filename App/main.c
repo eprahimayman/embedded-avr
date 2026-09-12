@@ -11,13 +11,29 @@
 #include"../Mcal/Dio/Dio_InterFace.h"
 #include"../Mcal/Dio/Dio_Private.h"
 #include"../Hal/Button/Button_Private.h"
+#include"../Hal/Lcd/Lcd_InterFace.h"
+#include"../Hal/Lcd/Lcd_Private.h"
+#include"../Hal/KPD/KPD_InterFace.h"
+#include"../Hal/KPD/KPD_Private.h"
+#include"Lcdsinusoidalform/Lcd_sinusoidal form_Interface.h"
 #include"TrafficLightApp/TrafficLightApp_InterFace.h"
+#include"LedAnimation/LedAnimation_InterFace.h"
+#include"LedAnimation/LedAnimation_Config.h"
 #include <util/delay.h>
 
 int main(void){
-	TrafficLightApp_Init();
-	while(1){
-		TrafficLightApp_Run();
-	}
+	uint8_t KeyValue = Kpd_BtnValueNotPressed;
+	    KPD_Init();
+
+	    while(1)
+	    {
+	        KPD_GetKPDValue(&KeyValue);
+
+	        if(KeyValue != Kpd_BtnValueNotPressed)
+	        {
+	            LedAnimation(KeyValue);
+	        }
+	    }
+
 }
 
